@@ -8,7 +8,7 @@ from pywps import Process, LiteralInput, ComplexInput, ComplexOutput, Format, FO
 
 class Buffer(Process):
     def __init__(self):
-        inputs = [ComplexInput('poly_in', 'Input1', [Format('GML')]),
+        inputs = [ComplexInput('poly_in', 'Input1', [Format('GML')], max_occurs='2'),
                   LiteralInput('buffer', 'Buffer', data_type='float')
                   ]
         outputs = [ComplexOutput('buff_out', 'Buffered', [Format('GML')])]
@@ -31,7 +31,7 @@ class Buffer(Process):
     def _handler(self, request, response):
         from osgeo import ogr
 
-        inSource = ogr.Open(request.inputs['poly_in'].file)
+        inSource = ogr.Open(request.inputs['poly_in'][0].file)
 
         inLayer = inSource.GetLayer()
         out = inLayer.GetName()
@@ -53,7 +53,7 @@ class Buffer(Process):
             inGeometry = inFeature.GetGeometryRef()
 
             # make the buffer
-            buff = inGeometry.Buffer(float(request.inputs['buffer'].data))
+            buff = inGeometry.Buffer(float(request.inputs['buffer'][0].data))
 
             # create output feature to the file
             outFeature = ogr.Feature(feature_def=outLayer.GetLayerDefn())

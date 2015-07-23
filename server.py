@@ -25,7 +25,7 @@ class Server(PyWPSServerAbstract):
 
         self.output_url = configuration.get_config_value('server', 'outputUrl')
         self.output_path = configuration.get_config_value('server', 'outputPath')
-        self.temp_path = configuration.get_config_value('server', 'tempPath')
+        self.temp_path = configuration.get_config_value('server', 'workdir')
 
         # check if in the configuration file specified directory exists otherwise create it
         try:
