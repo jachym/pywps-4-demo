@@ -1,9 +1,9 @@
-from pywps import Process, ComplexInput, Format, LiteralOutput
+from pywps import Process, ComplexInput, LiteralOutput, get_format
 
 
 class FeatureCount(Process):
     def __init__(self):
-        inputs = [ComplexInput('layer', 'Layer', [Format('GML')])]
+        inputs = [ComplexInput('layer', 'Layer', supported_formats=[get_format('GML')])]
         outputs = [LiteralOutput('count', 'Count', data_type='integer')]
         
         super(FeatureCount, self).__init__(

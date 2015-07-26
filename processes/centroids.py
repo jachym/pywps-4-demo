@@ -1,14 +1,14 @@
 import json
 import os
 import subprocess
-from pywps import Process, ComplexInput, ComplexOutput, Format, FORMATS
+from pywps import Process, ComplexInput, ComplexOutput, get_format
 from pywps.wpsserver import temp_dir
 
 
 class Centroids(Process):
     def __init__(self):
-        inputs = [ComplexInput('layer', 'Layer', [Format('GML')])]
-        outputs = [ComplexOutput('out', 'Referenced Output', [Format('JSON')])]
+        inputs = [ComplexInput('layer', 'Layer', supported_formats=[get_format('GML')])]
+        outputs = [ComplexOutput('out', 'Referenced Output', supported_formats=[get_format('JSON')])]
 
         super(Centroids, self).__init__(
             self._handler,

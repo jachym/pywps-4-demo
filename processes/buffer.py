@@ -3,15 +3,17 @@ import tempfile
 
 __author__ = 'Brauni'
 
-from pywps import Process, LiteralInput, ComplexInput, ComplexOutput, Format, FORMATS
+from pywps import Process, LiteralInput, ComplexInput, ComplexOutput, Format, get_format
 
 
 class Buffer(Process):
     def __init__(self):
-        inputs = [ComplexInput('poly_in', 'Input1', [Format('GML')], max_occurs='2'),
+        inputs = [ComplexInput('poly_in', 'Input1',
+                               supported_formats=[get_format('GML')],
+                               max_occurs='2'),
                   LiteralInput('buffer', 'Buffer', data_type='float')
-                  ]
-        outputs = [ComplexOutput('buff_out', 'Buffered', [Format('GML')])]
+                 ]
+        outputs = [ComplexOutput('buff_out', 'Buffered', supported_formats=[get_format('GML')])]
 
         super(Buffer, self).__init__(
             self._handler,
@@ -66,7 +68,7 @@ class Buffer(Process):
             response.update_status("Calculating buffer for feature %d from %d" % (index + 1, featureCount),
                                    (100 * (index + 1) / featureCount * 1))
 
-        response.outputs['buff_out'].output_format = Format(FORMATS['GML'])
+        response.outputs['buff_out'].data_format = get_format('GML')
         response.outputs['buff_out'].file = outPath
 
         return response

@@ -3,13 +3,13 @@ __author__ = 'matteo'
 import json
 import os
 import subprocess
-from pywps import Process, ComplexInput, LiteralOutput, Format
+from pywps import Process, ComplexInput, LiteralOutput, get_format
 from pywps.wpsserver import temp_dir
 
 
 class Area(Process):
     def __init__(self):
-        inputs = [ComplexInput('layer', 'Layer', [Format('GML')])]
+        inputs = [ComplexInput('layer', 'Layer', [get_format('GML')])]
         outputs = [LiteralOutput('area', 'Area', data_type='string')]
 
         super(Area, self).__init__(

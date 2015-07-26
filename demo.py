@@ -16,6 +16,7 @@ from processes.feature_count import FeatureCount
 from processes.buffer import Buffer
 from processes.area import Area
 from processes.bboxinout import Box
+from processes.gdalwarp import Warp
 
 
 def main():
@@ -53,7 +54,8 @@ def start(args, kill = None):
         Sleep(),
         Buffer(),
         Area(),
-        Box()
+        Box(),
+        Warp()
     ]
 
     s = Server(processes=processes, config_file=config_file)
