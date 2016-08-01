@@ -13,7 +13,6 @@ class FeatureCount(Process):
             title='Feature count',
             abstract='This process counts the number of features in a vector',
             profile='',
-            wsdl='',
             metadata=['Feature', 'Count'],
             inputs=inputs,
             outputs=outputs,
