@@ -13,7 +13,6 @@ class Sleep(Process):
             title='Sleep Process',
             abstract='This process will sleep for a given delay or 10 seconds if not a valid value',
             profile='',
-            wsdl='',
             metadata=['Sleep', 'Wait', 'Delay'],
             inputs=inputs,
             outputs=outputs,
